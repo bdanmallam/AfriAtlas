@@ -1,0 +1,76 @@
+---
+output: github_document
+---
+
+<p align="center">
+  <img src="man/figures/logo.jpg" alt="AfriAtlas R Package Logo" width="180">
+</p>
+
+# AfriAtlas: Visualizing African Bird Atlas Data
+
+The **`AfriAtlas`** R package provides robust, publication-ready tools for ecologists and enthusiasts to download, process, and visualize pentad-level bird atlas data from the **African Bird Atlas Project (ABAP)** and its associated country projects (like SABAP2).
+
+The package is designed for portability and efficiency, handling dynamic boundaries via the `rnaturalearth` package and enforcing API safety limits.
+
+---
+
+## 🚀 Installation
+
+You can install the development version of `AfriAtlas` directly from GitHub using the `remotes` package.
+
+```{r install, eval = FALSE}
+# Install necessary dependencies if you haven't already
+if (!requireNamespace("remotes", quietly = TRUE)) {
+  install.packages("remotes")
+}
+
+
+# Install AfriAtlas 
+remotes::install_github("bdanmallam/AfriAtlas")
+Quick Usage Examples
+Once installed, the package provides three core functions:
+
+##1. Map Species Distribution (map_species)
+Generates a map of species sightings versus coverage, including a widespreadness pie chart. Execution is halted if more than 10 species are requested.
+
+```{r eval=FALSE}
+library(AfriAtlas)
+
+# Generate a single species map for South Africa (Pin-tailed Whydah)
+map_species(species_codes = 846, country = "Nigeria")
+
+# Generate maps for a batch of species in Kenya (saved as PNGs)
+map_species(species_codes = c(129, 311), country = "Kenya")
+```
+
+## 2. Map Survey Effort (map_coverage)
+Generates a map showing the total full-protocol survey hours (effort) per pentad. Categories are dynamically adjusted based on the maximum effort level found in the country.
+
+```{r eval=FALSE}
+# Generate effort map for Nigeria 
+map_coverage("Nigeria")
+
+# Generate effort map for South Africa 
+map_coverage("South Africa")
+```
+
+## 3. Review and Access Codes (get_species_code)
+Utility functions to access the internal species data before running mapping functions.
+
+```{r eval = FALSE}
+library(AfriAtlas)
+
+# A. Explore the full dataset (opens in a viewer pane)
+AfriAtlas::explore_species_codes() 
+
+# B. Get a specific species code by common name
+code <- AfriAtlas::get_species_code("Common Bulbul")
+print(code)
+```
+
+## Further Documentation
+For detailed guides, examples, and technical explanations, please refer to the package vignette:
+
+```{r eval = FALSE}
+vignette("AfriAtlas_tutorial")
+```
