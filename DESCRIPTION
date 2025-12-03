@@ -23,3 +23,5 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+URL: https://github.com/bdanmallam/AfriAtlas
+BugReports: https://github.com/bdanmallam/AfriAtlas/issues
