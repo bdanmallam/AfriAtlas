@@ -23,7 +23,7 @@ The AfriAtlas package provides tools for ecologists, conservationists, and bird 
 
 # Installation and Loading
 
-Since this is a development version, users install the package directly from GitHub (once submitted).
+Since this is a development version, users install the package directly from GitHub.
 
 
 ```{r eval=FALSE}
@@ -108,12 +108,7 @@ map_species(species_codes = 846, country = "South Africa")
 ```
 
 Example: Batch Processing (Nigeria)
-When multiple species are provided, the function saves all plots as transparent PNG files to the working directory but suppresses the graphical output for efficiency.
-
-```{r eval=FALSE}
-# Species 11491 (Common Bulbul), 3718 (White-billed Buffalo Weaver)
-map_species(species_codes = c(11491, 3718), country = "Nigeria")
-```
+When multiple species are provided, the function saves all plots as PNG files to the working directory but suppresses the graphical output for efficiency.
 
 The output files will be saved as:
 

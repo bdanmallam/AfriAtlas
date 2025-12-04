@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 # AfriAtlas: Visualizing African Bird Atlas Data
 
-The **`AfriAtlas`** R package provides robust, publication-ready tools for ecologists and enthusiasts to download, process, and visualize pentad-level bird atlas data from the **African Bird Atlas Project (ABAP)** and its associated country projects (like SABAP2).
+The **`AfriAtlas`** R package provides robust, publication-ready tools for ecologists and enthusiasts to download, process, and visualize pentad-level bird atlas data from the **African Bird Atlas Project (ABAP)** and its associated country projects (like Nigeria Bird Atlas Project).
 
 The package is designed for portability and efficiency, handling dynamic boundaries via the `rnaturalearth` package and enforcing API safety limits.
 
@@ -102,14 +102,7 @@ map_coverage("Nigeria")
 map_coverage("South Africa")
 ```
 
-# 4. Review Codes (show_codes)
-Utility to quickly print a list of species codes to the console before running a batch process.
-
-```{r eval = FALSE}
-show_codes(c(129, 311, 437, 846))
-```
-
-# 📖Further Documentation
+# Further Documentation
 For detailed guides, examples, and technical explanations, please refer to the package vignette:
 
 ```{r eval = FALSE}
