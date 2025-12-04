@@ -1,6 +1,7 @@
 #' Map Species Distribution
 #'
-#' Generates a map of species sightings and coverage for a specific country.
+#' Generates a map of species sightings and coverage for a specific country
+#' using the AfriAtlas aesthetic standards.
 #'
 #' @param species_codes A numeric vector of species codes (max 10).
 #' @param country A character string representing the country name (e.g., "Nigeria").
@@ -17,9 +18,11 @@ map_species <- function(species_codes, country) {
   if (length(species_codes) > 10) {
     stop(paste("The number of species codes (", length(species_codes), ") exceeds the maximum limit of 10. Execution stopped. Use explore_species_codes() to review the list."))
   }
+
+  # Check if this is a single map request
   is_single_map <- length(species_codes) == 1
 
-  # --- CRITICAL FIX: SANITIZE COUNTRY NAME FOR API ---
+  # --- SANITIZE COUNTRY NAME FOR API ---
   sanitized_country <- gsub(" ", "", country, fixed = TRUE)
 
   # --- 1. INITIAL SETUP AND BOUNDARY FILTERING ---
@@ -34,23 +37,25 @@ map_species <- function(species_codes, country) {
     geoboundary_country <- adm1_boundaries
   }
 
+  # Calculate Aspect Ratio for Dynamic Height
   bbox <- sf::st_bbox(geoboundary_country)
   width_geo <- bbox["xmax"] - bbox["xmin"]
   height_geo <- bbox["ymax"] - bbox["ymin"]
   asp_ratio <- height_geo / width_geo
 
-  # Load coverage
+  # Load Coverage Data
   coverage_url <- paste0("https://api.birdmap.africa/sabap2/v2/coverage/country/", sanitized_country, "?format=geoJSON")
   coverage_data <- suppressMessages(sf::st_read(coverage_url)) %>%
     dplyr::select(pentad, geometry) %>%
     dplyr::mutate(Legend = "Coverage")
 
-  # --- DATA CHANGE: Use internal package data ---
-  # No longer reading CSV. 'species_data' is lazy-loaded from data/
+  # Use internal package data
   species_codes_df <- AfriAtlas::species_data
 
+  # --- MAIN LOOP ---
   for (code in species_codes) {
 
+    # 2. DATA ACQUISITION
     bird_url <- paste0("https://api.birdmap.africa/sabap2/v2/summary/species/", code, "/country/", sanitized_country, "?format=geoJSON")
     bird_data <- suppressMessages(sf::st_read(bird_url))
 
@@ -63,7 +68,7 @@ map_species <- function(species_codes, country) {
       dplyr::select(pentad, geometry) %>%
       dplyr::mutate(Legend = "Sightings")
 
-    # --- WIDESPREADNESS CALCULATION ---
+    # 3. WIDESPREADNESS CALCULATION (PIE CHART)
     covered_pentads <- unique(coverage_data$pentad)
     sighted_pentads <- unique(bird_data$pentad)
     n_coverage <- length(covered_pentads)
@@ -79,52 +84,95 @@ map_species <- function(species_codes, country) {
         Label = paste0(round(Percentage * 100, 1), "%")
       )
 
+    # Corrected Pie Chart Aesthetics
     pie_chart <- ggplot(pie_data, aes(x = "", y = Percentage, fill = Category)) +
       geom_bar(stat = "identity", width = 1, color = "white") +
       coord_polar("y", start = 0) +
       scale_fill_manual(values = c("Sighted" = "#f03b20", "Not Sighted" = "#ffeda0")) +
       geom_text(data = subset(pie_data, Category == "Sighted"),
-                aes(label = Label), position = position_stack(vjust = 0.5),
-                size = 3.0, color = "black") +
-      theme_void() + theme(legend.position = "none")
+                aes(label = Label),
+                position = position_stack(vjust = 0.5),
+                size = 3.0,
+                color = "black") +
+      theme_void() +
+      theme(legend.position = "none")
 
-    # --- MAP ---
+    # 4. MAP CONSTRUCTION
     map_data <- dplyr::bind_rows(coverage_data, bird_data)
-
-    # Lookup name using internal data
     commoName <- species_codes_df$commonName[species_codes_df$species_code == code]
 
     current_year <- format(Sys.Date(), "%Y")
     caption_text <- paste0("© ", current_year, " ", country, " Bird Atlas,\n a member of the African Bird Atlas Project")
 
+    # Base Map
     map <- ggplot() +
+      # Aesthetic: Lighter, thinner ADM1 boundaries
       geom_sf(data = geoboundary_country, fill = NA, color = "gray60", linewidth = 0.3) +
       geom_sf(data = map_data, aes(fill = Legend, color = Legend), alpha = 0.7) +
+
+      # Aesthetic: Specific Color Palette
       scale_color_manual(values = c("Coverage" = "#ffeda0", "Sightings" = "#f03b20")) +
       scale_fill_manual(values = c("Coverage" = "#ffeda0", "Sightings" = "#f03b20")) +
+
       labs(title = paste0("Observations of ", commoName, " in ", country),
            caption = caption_text, x = NULL, y = NULL) +
+
+      # Aesthetic: Specific Theme Details
       theme_minimal() +
+      theme(
+        plot.title = element_text(size = 15, face = "bold"),
+        legend.key = element_rect(colour = NA),
+        legend.position = "bottom",
+        legend.direction = "horizontal",
+        legend.title = element_text(face="italic"),
+        plot.margin = unit(c(10,5,5,5),"mm"),
+        panel.border = element_rect(fill = NA, color = "gray70"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        axis.title.x = element_blank(),
+        axis.title.y = element_blank(),
+        panel.background = element_rect(fill = "transparent", color = NA),
+        plot.background = element_rect(fill = "transparent", color = NA)
+      ) +
       annotation_scale(location = "br", width_hint = 0.2) +
       annotation_north_arrow(location = "tl", which_north = "true",
-                             height = unit(1.0, "cm"), width = unit(1.0, "cm"))
+                             height = unit(1.0, "cm"), width = unit(1.0, "cm"),
+                             pad_x = unit(0.25, "cm"), pad_y = unit(0.25, "cm")) +
+      guides(fill = guide_legend(title = "Legend"))
 
+    # Aesthetic: Coordinate Exceptions
     if (country == "South Africa") {
       map <- map + coord_sf(xlim = st_bbox(geoboundary_country)[c(1, 3)], ylim = c(-40, -20))
     } else {
       map <- map + coord_sf(xlim = st_bbox(geoboundary_country)[c(1, 3)], ylim = st_bbox(geoboundary_country)[c(2, 4)])
     }
 
+    # 5. FINAL COMPOSITION
     final_plot <- cowplot::ggdraw() +
       cowplot::draw_plot(map) +
+      # Aesthetic: Precise Pie Chart Positioning
       cowplot::draw_plot(pie_chart, x = 0.78, y = 0.72, width = 0.18, height = 0.18)
 
-    if (is_single_map) print(final_plot)
+    # --- PRINT AND SAVE LOGIC ---
 
+    # 1. Always Save (Requirement for Atlas generation)
     fixed_width <- 6.45
     dynamic_height <- fixed_width * asp_ratio + 1.25
 
-    ggsave(paste0(commoName, "_", country, ".png"), plot = final_plot,
-           width = fixed_width, height = dynamic_height, dpi = 150, type = "cairo", bg = "transparent")
+    filename <- paste0(commoName, "_", country, ".png")
+
+    ggsave(filename,
+           plot = final_plot,
+           width = fixed_width,
+           height = dynamic_height,
+           dpi = 150,
+           type = "cairo",
+           bg = "transparent")
+
+    # 2. Print ONLY if it is a single map query
+    if (is_single_map) {
+      print(final_plot)
+      message(paste("Map saved to:", filename))
+    }
   }
 }
