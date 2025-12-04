@@ -3,7 +3,8 @@ Title: Create Species and Effort Maps from African Bird Atlas Project Data
 Version: 0.1.0
 Authors@R:
     person(given = "Bello", family = "Adamu Danmallam", role = c("aut", "cre"),
-    email = "adamubello001@gmail.com")
+    email = "adamubello001@gmail.com",
+           comment = c(ORCID = "0000-0001-7783-4351"))
 Description: Tools for generating standardized species distribution maps and
     coverage (effort) maps using the African Bird Atlas Project (ABAP) API.
     It provides functions to visualize pentad-level sighting data and survey
