@@ -1,10 +1,14 @@
 Package: AfriAtlas
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
+Title: Create Species and Effort Maps from African Bird Atlas Project Data
+Version: 0.1.0
+Authors@R:
+    person(given = "Bello", family = "Adamu Danmallam", role = c("aut", "cre"),
+    email = "adamubello001@gmail.com")
+Description: Tools for generating standardized species distribution maps and
+    coverage (effort) maps using the African Bird Atlas Project (ABAP) API.
+    It provides functions to visualize pentad-level sighting data and survey
+    effort across various African countries, primarily relying on 'sf',
+    'ggplot2', and 'rnaturalearth' for geospatial processing and plotting.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
