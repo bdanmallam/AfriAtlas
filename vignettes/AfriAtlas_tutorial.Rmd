@@ -41,10 +41,10 @@ library(sf)
 library(ggplot2)
 ```
 
-# 1. Working With Species Codes
+# 1. Working with species codes
 The mapping functions require numeric Species Codes (e.g., 493 for Barn Swallow). AfriAtlas provides three tools to help you manage these codes.
 
-## 1.1. Lookup a Code by Name: `get_species_code()`
+## 1.1. Lookup a code by name: `get_species_code()`
 If you know the English common name or scientific name, you can quickly retrieve the code. This function is case-sensitive.
 
 ```{r eval=FALSE}
@@ -58,7 +58,7 @@ get_species_code("Hooded vulture")
 get_species_code("Necrosyrtes monachus")
 ```
 
-## 1.2 Browse All Species: `explore_species_codes()`
+## 1.2 Browse all species: `explore_species_codes()`
 If you are unsure of the spelling or want to browse the full species codes, this function opens the internal dataset in the RStudio Viewer.
 
 (Note: This function works only in interactive sessions).
@@ -67,7 +67,7 @@ If you are unsure of the spelling or want to browse the full species codes, this
 explore_species_codes()
 ```
 
-## 1.3 Reviewing Species Codes: `show_codes()`
+## 1.3 Reviewing species codes: `show_codes()`
 Before running a batch process, it is best practice to review the list of codes being used. The `show_codes()` function is a simple utility for this. Note that the primary mapping function, `map_species()`, will stop execution if the list exceeds Spp 10 codes.
 
 ```{r eval=FALSE}
@@ -82,7 +82,7 @@ show_codes(my_species_list)
 ```
 
 
-# 2. Mapping Survey Effort: `map_coverage()` 
+# 2. Mapping survey effort: `map_coverage()` 
 
 The `map_coverage()` function generates a map showing the intensity of bird atlas survey effort, categorized by total hours spent per pentad (e.g., 0–1 hr, 2–3 hrs, etc.). It also produces accompanying summary statistics, including the number of pentads in each effort category and the mean ± SE of accumulated hours, which are automatically exported to a CSV file.
 
@@ -98,7 +98,7 @@ Example: Mapping South Africa's Effort
 map_coverage("South Africa")
 ```
 
-# 3. Mapping Species Distribution: `map_species()` 🗺️
+# 3. Mapping species distribution: `map_species()` 🗺️
 The `map_species()` function downloads the species sighting data, plots it against overall coverage, and includes a widespreadness pie chart in the top-right corner.
 
 Example: Single Species Map (South Africa)

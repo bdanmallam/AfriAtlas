@@ -114,13 +114,13 @@ directly from GitHub.</p>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="working-with-species-codes">1. Working With Species Codes<a class="anchor" aria-label="anchor" href="#working-with-species-codes"></a>
+<h2 id="working-with-species-codes">1. Working with species codes<a class="anchor" aria-label="anchor" href="#working-with-species-codes"></a>
 </h2>
 <p>The mapping functions require numeric Species Codes (e.g., 493 for
 Barn Swallow). AfriAtlas provides three tools to help you manage these
 codes.</p>
 <div class="section level3">
-<h3 id="lookup-a-code-by-name-get_species_code">1.1. Lookup a Code by Name: <code>get_species_code()</code><a class="anchor" aria-label="anchor" href="#lookup-a-code-by-name-get_species_code"></a>
+<h3 id="lookup-a-code-by-name-get_species_code">1.1. Lookup a code by name: <code>get_species_code()</code><a class="anchor" aria-label="anchor" href="#lookup-a-code-by-name-get_species_code"></a>
 </h3>
 <p>If you know the English common name or scientific name, you can
 quickly retrieve the code. This function is case-sensitive.</p>
@@ -135,7 +135,7 @@ quickly retrieve the code. This function is case-sensitive.</p>
 <span><span class="fu"><a href="../reference/get_species_code.html">get_species_code</a></span><span class="op">(</span><span class="st">"Necrosyrtes monachus"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="browse-all-species-explore_species_codes">1.2 Browse All Species: <code>explore_species_codes()</code><a class="anchor" aria-label="anchor" href="#browse-all-species-explore_species_codes"></a>
+<h3 id="browse-all-species-explore_species_codes">1.2 Browse all species: <code>explore_species_codes()</code><a class="anchor" aria-label="anchor" href="#browse-all-species-explore_species_codes"></a>
 </h3>
 <p>If you are unsure of the spelling or want to browse the full species
 codes, this function opens the internal dataset in the RStudio
@@ -145,7 +145,7 @@ Viewer.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/explore_species_codes.html">explore_species_codes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="reviewing-species-codes-show_codes">1.3 Reviewing Species Codes: <code>show_codes()</code><a class="anchor" aria-label="anchor" href="#reviewing-species-codes-show_codes"></a>
+<h3 id="reviewing-species-codes-show_codes">1.3 Reviewing species codes: <code>show_codes()</code><a class="anchor" aria-label="anchor" href="#reviewing-species-codes-show_codes"></a>
 </h3>
 <p>Before running a batch process, it is best practice to review the
 list of codes being used. The <code><a href="../reference/show_codes.html">show_codes()</a></code> function is a
@@ -164,7 +164,7 @@ simple utility for this. Note that the primary mapping function,
 </div>
 </div>
 <div class="section level2">
-<h2 id="mapping-survey-effort-map_coverage">2. Mapping Survey Effort: <code>map_coverage()</code><a class="anchor" aria-label="anchor" href="#mapping-survey-effort-map_coverage"></a>
+<h2 id="mapping-survey-effort-map_coverage">2. Mapping survey effort: <code>map_coverage()</code><a class="anchor" aria-label="anchor" href="#mapping-survey-effort-map_coverage"></a>
 </h2>
 <p>The <code><a href="../reference/map_coverage.html">map_coverage()</a></code> function generates a map showing the
 intensity of bird atlas survey effort, categorized by total hours spent
@@ -180,7 +180,7 @@ exported to a CSV file.</p>
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/map_coverage.html">map_coverage</a></span><span class="op">(</span><span class="st">"South Africa"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="mapping-species-distribution-map_species">3. Mapping Species Distribution: <code>map_species()</code> 🗺️<a class="anchor" aria-label="anchor" href="#mapping-species-distribution-map_species"></a>
+<h2 id="mapping-species-distribution-map_species">3. Mapping species distribution: <code>map_species()</code> 🗺️<a class="anchor" aria-label="anchor" href="#mapping-species-distribution-map_species"></a>
 </h2>
 <p>The <code><a href="../reference/map_species.html">map_species()</a></code> function downloads the species
 sighting data, plots it against overall coverage, and includes a

@@ -105,34 +105,38 @@
 <h1 id="quick-usage-examples">Quick Usage Examples<a class="anchor" aria-label="anchor" href="#quick-usage-examples"></a>
 </h1>
 <div class="section level2">
-<h2 id="id_1-finding-and-reviewing-species-codes">1. Finding and Reviewing Species Codes<a class="anchor" aria-label="anchor" href="#id_1-finding-and-reviewing-species-codes"></a>
+<h2 id="id_1-finding-and-reviewing-species-codes">1. Finding and reviewing species codes<a class="anchor" aria-label="anchor" href="#id_1-finding-and-reviewing-species-codes"></a>
 </h2>
 <p>The mapping functions require numeric Species Codes (e.g., 11491 for Common Bulbul). AfriAtlas provides three tools to help you manage these codes.</p>
 </div>
 <div class="section level2">
-<h2 id="a-lookup-a-code-by-name-get_species_code">A. Lookup a Code by Name: get_species_code()<a class="anchor" aria-label="anchor" href="#a-lookup-a-code-by-name-get_species_code"></a>
+<h2 id="id_11-lookup-a-code-by-name-get_species_code">1.1. Lookup a code by name: <code>get_species_code()</code>
+<a class="anchor" aria-label="anchor" href="#id_11-lookup-a-code-by-name-get_species_code"></a>
 </h2>
-<p>If you know the English common name, you can quickly retrieve the code. This function is case-sensitive.</p>
+<p>If you know the English common name or scientific name, you can quickly retrieve the code. This function is case-sensitive.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Find code for Common Bulbul</span></span>
-<span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_species_code.html">get_species_code</a></span><span class="op">(</span><span class="st">"Common Bulbul"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Find code for Barn Swallow (Hirundo rustica)</span></span>
+<span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_species_code.html">get_species_code</a></span><span class="op">(</span><span class="st">"Barn Swallow"</span><span class="op">)</span></span>
+<span><span class="va">code</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/get_species_code.html">get_species_code</a></span><span class="op">(</span><span class="st">"Hirundo rustica"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">code</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Find code for Pin-tailed Whydah</span></span>
-<span><span class="fu"><a href="reference/get_species_code.html">get_species_code</a></span><span class="op">(</span><span class="st">"Pin-tailed Whydah"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="co"># Find code for Hooded vulture (Necrosyrtes monachus)</span></span>
+<span><span class="fu"><a href="reference/get_species_code.html">get_species_code</a></span><span class="op">(</span><span class="st">"Hooded vulture"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="reference/get_species_code.html">get_species_code</a></span><span class="op">(</span><span class="st">"Necrosyrtes monachus"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="b-browse-all-species-explore_species_codes">B. Browse All Species: explore_species_codes()<a class="anchor" aria-label="anchor" href="#b-browse-all-species-explore_species_codes"></a>
+<h2 id="id_12-browse-all-species-explore_species_codes">1.2. Browse all species: <code>explore_species_codes()</code>
+<a class="anchor" aria-label="anchor" href="#id_12-browse-all-species-explore_species_codes"></a>
 </h2>
 <p>If you are unsure of the spelling or want to browse the full species codes, this function opens the internal dataset in the RStudio Viewer.</p>
-<p>(Note: This function works only in interactive sessions).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/explore_species_codes.html">explore_species_codes</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
-<h2 id="c-reviewing-species-codes-show_codes">C. Reviewing Species Codes: show_codes()<a class="anchor" aria-label="anchor" href="#c-reviewing-species-codes-show_codes"></a>
+<h2 id="id_13-reviewing-species-codes-show_codes">1.3. Reviewing species codes: <code>show_codes()</code>
+<a class="anchor" aria-label="anchor" href="#id_13-reviewing-species-codes-show_codes"></a>
 </h2>
-<p>Before running a batch process, it is best practice to review the list of codes being used. The show_codes() function is a simple utility for this. Note that the primary mapping function, map_species(), will stop execution if the list exceeds Spp 10 codes.</p>
+<p>Before running a batch process, it is best practice to review the list of codes being used. The <code><a href="reference/show_codes.html">show_codes()</a></code> function is a simple utility for this. Note that the primary mapping function, <code><a href="reference/map_species.html">map_species()</a></code>, will stop execution if the list exceeds Spp 10 codes.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Example list of species codes (e.g., common African species)</span></span>
 <span><span class="va">my_species_list</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">129</span>, <span class="fl">311</span>, <span class="fl">437</span>, <span class="fl">846</span>, <span class="fl">11491</span>, <span class="fl">1168</span><span class="op">)</span></span>
@@ -145,7 +149,8 @@
 </div>
 </div>
 <div class="section level1">
-<h1 id="id_2-map-species-distribution-map_species">2. Map Species Distribution (map_species)<a class="anchor" aria-label="anchor" href="#id_2-map-species-distribution-map_species"></a>
+<h1 id="id_2-map-species-distribution-map_species">2. Map species distribution: <code>map_species()</code>
+<a class="anchor" aria-label="anchor" href="#id_2-map-species-distribution-map_species"></a>
 </h1>
 <p>Generates a map of species sightings versus coverage, including a widespreadness pie chart. Execution is halted if more than 10 species are requested.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -158,9 +163,10 @@
 <span><span class="fu"><a href="reference/map_species.html">map_species</a></span><span class="op">(</span>species_codes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">129</span>, <span class="fl">311</span><span class="op">)</span>, country <span class="op">=</span> <span class="st">"Kenya"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level1">
-<h1 id="id_3-map-survey-effort-map_coverage">3. Map Survey Effort (map_coverage)<a class="anchor" aria-label="anchor" href="#id_3-map-survey-effort-map_coverage"></a>
+<h1 id="id_3-map-survey-effort-map_coverage">3. Map survey effort <code>map_coverage()</code>
+<a class="anchor" aria-label="anchor" href="#id_3-map-survey-effort-map_coverage"></a>
 </h1>
-<p>Generates a map showing the total full-protocol survey hours (effort) per pentad. Categories are dynamically adjusted based on the maximum effort level found in the country.</p>
+<p>The <code><a href="reference/map_coverage.html">map_coverage()</a></code> function generates a map showing the intensity of bird atlas survey effort, categorized by total hours spent per pentad (e.g., 0–1 hr, 2–3 hrs, etc.). It also produces accompanying summary statistics, including the number of pentads in each effort category and the mean ± SE of accumulated hours, which are automatically exported to a CSV file.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Generate effort map for Nigeria </span></span>
 <span><span class="fu"><a href="reference/map_coverage.html">map_coverage</a></span><span class="op">(</span><span class="st">"Nigeria"</span><span class="op">)</span></span>
@@ -171,7 +177,7 @@
 <div class="section level1">
 <h1 id="further-documentation">Further Documentation<a class="anchor" aria-label="anchor" href="#further-documentation"></a>
 </h1>
-<p>For detailed guides, examples, and technical explanations, please refer to the package vignette:</p>
+<p>For further guides, please refer to the package vignette:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette</a></span><span class="op">(</span><span class="st">"AfriAtlas_tutorial"</span><span class="op">)</span></span></code></pre></div>
 </div>
